@@ -1,0 +1,790 @@
+﻿
+<div id="myScrollspy" class="col-md-11">
+    <!-- year 2015 -->
+    <section id="2015">
+
+
+        <div id="divDec">
+            <ul class="thumbnails  nov" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="dec15">
+                        <label></label>
+                        <span class="month-text">DEC</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataDec)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="dec14" value=@urladdress.EventId class="styled dec15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+                                            
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+
+        <div id="divNov">
+            <ul class="thumbnails  nov" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="nov15">
+                        <label></label>
+                        <span class="month-text">NOV</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataNov)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="nov14" value=@urladdress.EventId class="styled nov15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+        <div id="divOct">
+            <ul class="thumbnails  oct" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="oct15">
+                        <label></label>
+                        <span class="month-text">OCT</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataOct)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="oct14" value=@urladdress.EventId class="styled oct15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+        <div id="divSep">
+            <ul class="thumbnails  sep" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="sep15">
+                        <label></label>
+                        <span class="month-text">SEP</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataSep)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="sep14" value=@urladdress.EventId class="styled sep15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+        <div id="divAug">
+            <ul class="thumbnails  aug" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="aug15">
+                        <label></label>
+                        <span class="month-text">AUG</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataAug)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="aug14" value=@urladdress.EventId class="styled aug15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+
+        <div id="divJuly">
+            <ul class="thumbnails  july" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="july15">
+                        <label></label>
+                        <span class="month-text">JUL</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataJuly)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="july14" value=@urladdress.EventId class="styled july15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+
+        <div id="divJune">
+            <ul class="thumbnails  june" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="june15">
+                        <label></label>
+                        <span class="month-text">JUN</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataJune)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="june14" value=@urladdress.EventId class="styled june15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+        <div id="divMay">
+            <ul class="thumbnails  may" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="may15">
+                        <label></label>
+                        <span class="month-text">MAY</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataMay)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="may14" value=@urladdress.EventId class="styled may15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+
+        <div id="divApr">
+            <ul class="thumbnails  april" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input class="styled select-all" type="checkbox" id="apr15">
+                        <label></label>
+                        <span class="month-text">APR</span>
+                    </div>
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataApr)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="apr14" value=@urladdress.EventId class="styled apr15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+
+
+        <div id="divMar">
+            <ul class="thumbnails  march" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all chkclass" id="mar15">
+                        <label></label>
+                        <span class="month-text">MAR</span>
+                    </div>
+
+                </li>
+
+                @foreach (var urladdress in @ViewBag.EventVarDataMarch)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left ">
+                            <input type="checkbox" name="mar14" value=@urladdress.EventId class="styled mar15 chkclass">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    { 
+                                        if(@collab.eventid == @urladdress.EventId)
+                                        { 
+                                            <span class="circle">@Html.Encode(collab.initial)</span>  
+                                            @*<span class="circle">SC</span>*@ 
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+        <div id="divFeb">
+            <ul class="thumbnails  february" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input type="checkbox" class="styled select-all" id="feb15">
+                        <label></label>
+                        <span class="month-text">FEB</span>
+                    </div>
+
+                </li>
+                @foreach (var urladdress in @ViewBag.EventVarDataFeb)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="feb14" value=@urladdress.EventId class="styled feb15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+        
+
+        <div id="divJan">
+            <ul class="thumbnails january" id="hover-cap-4col">
+                <li class="month">
+                    <div class="checkbox checkbox-primary pull-left" id="divchkJan">
+                        <input type="checkbox" id="jan15" class="styled select-all">
+                        <label></label>
+                        <span class="month-text">JAN</span>
+                    </div>
+
+                </li>
+
+
+                @foreach (var urladdress in @ViewBag.EventVarDataJan)
+                {
+                    <li class="col-md-4">
+                        <div class="checkbox checkbox-primary pull-left">
+                            <input type="checkbox" name="jan14" value=@urladdress.EventId class="styled jan15">
+                            <label></label>
+                        </div>
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <div class="icon">
+                                    <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                    <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                </div>
+                                <h4>@Html.Encode(urladdress.Name)</h4>
+                                <p>@Html.Encode(urladdress.LocationName)</p>
+                                <p>@Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</p>
+                                <p><button class="btn btn-default">SHOW DETAILS</button></p>
+                                <div class="cap-bottom">
+                                    @foreach (var collab in @ViewBag.EventCollaborator)
+                                    {
+                                        if (@collab.eventid == @urladdress.EventId)
+                                        {
+                                            <span class="circle">@Html.Encode(collab.initial)</span>
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <img src="@Url.Content(urladdress.ImageURL)" />
+                            <h5> @Html.Encode(urladdress.Name)</h5>
+                            <p> @Html.Encode(urladdress.Description)</p>
+                            <p class="seperator"></p>
+                            <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                            <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                            <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                        </div>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+
+    
+
+    <input type="button" id="btnhid" hidden="hidden" title="" />
+    </section>
+    <div class="clear-both;"></div>
+    <!-- year 2014 -->
+
+
+</div>
+
+<script src="~/Content/js/custom.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+               
+        //$("[rel='tooltip']").tooltip();
+        //$('#hover-cap-4col .thumbnail').hover(
+        //    function () {
+        //        $(this).find('.caption').slideDown(250);
+        //    },
+        //    function () {
+        //        $(this).find('.caption').slideUp(250);
+        //    }
+        //);
+        if (!($('input[type="checkbox"]').hasClass('jan15'))) {
+            $("#divJan").hide();
+        }
+
+
+        if (!($('input[type="checkbox"]').hasClass('feb15'))) {
+            $("#divFeb").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('mar15'))) {
+            $("#divMar").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('apr15'))) {
+            $("#divApr").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('may15'))) {
+            $("#divMay").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('june15'))) {
+            $("#divJune").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('july15'))) {
+            $("#divJuly").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('aug15'))) {
+            $("#divAug").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('sep15'))) {
+            $("#divSep").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('oct15'))) {
+            $("#divOct").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('nov15'))) {
+            $("#divNov").hide();
+        }
+
+        if (!($('input[type="checkbox"]').hasClass('dec15'))) {
+            $("#divDec").hide();
+        }
+        //var checkboxvalues = "";
+        //$('input[type="checkbox"]').click(function () {
+        //    if ($(this).prop("checked") == true) {
+
+               
+        //        var favorite = [];
+
+        //       // if ($(this).hasClass("select-all")) {
+                                     
+        //             $.each($("input[type='checkbox']:checked"), function () {
+        //                favorite.push($(this).val());
+                      
+        //            });
+                                        
+        //             checkboxvalues = favorite.join("| ");
+        //             alert(checkboxvalues);
+        //            // checkboxvalues = favorite.toString();
+        //        // alert("Values of my checked checkboxes are " + checkboxvalues);
+        //             //alert(checkboxvalues);
+        //            $("#btnhid").val(checkboxvalues);
+                    
+
+        //        //}
+        //    }
+        //    else if ($(this).prop("checked") == false) {
+               
+        //    }
+        //});
+
+    });
+
+
+    </script>

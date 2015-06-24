@@ -1,0 +1,1138 @@
+﻿@model IEnumerable<EventForte.Models.EventDataContext>
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" />
+    <title>Dashboard</title>
+    <!-- Bootstrap -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet">
+
+    <!-- Custom css -->
+    <link href="~/Content/css/main-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/css/build.css" />
+
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-header rowbtn
+                <a class="pull-left logo" href="#"> <img src="~/Content/images/event-forte-logo.png" alt="Event Fort"> </a>
+                <ul class="pull-left">
+                    <li class="events active"><a href="#">Events</a></li>
+                    <li class="activity"><a href="#">Activities</a><span class="green-dot"></span></li>
+                    <li class="team"><a href="#">Team</a></li>
+                </ul>
+                <ul class="pull-right nav-right">
+                    <li class="upgrade-now">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <div>
+                            <div class="text-nor">YOU HAVE 7 DAYS LEFT</div>
+                            <div class="text-upgrade">UPGRADE NOW!</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="circle">JH</span>
+                        <div class="txt-name border-right">
+                            <span> Johannes H.</span>
+                            <i class="glyphicon glyphicon-menu-down"></i>
+                        </div>
+                    </li>
+                    <li class="dots"><a href="#"></a></li>
+                    <li class="bell pos-rel"><a href="#"><span class="circle-notice">2</span></a></li>
+                    <li class="question"><a href="#"></a></li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+ 
+    <div class="container red-section">
+        <div class="red-panel row">
+            <div class="col-md-11"><i class="glyphicon glyphicon-info-sign"></i> <p>EventForte lets you build custom rooms. Add an event and invite team members collaboratively design room layouts. <img src="~/Content/images/learn.png" alt="" /> <span class="tips">Learn Tips</span></p></div>
+            <div class="col-md-1 noPaddingRight"><i class="glyphicon glyphicon-remove pull-right" id="close-panel"></i> </div>
+        </div>
+    </div>
+
+    <!-- top container white -->
+    <div class="container white-section ">
+        <div class="white-panel row">
+            <nav class="navbar navbar-default navbar-static-top mar0">
+                <div class="container-header row">
+                    <ul class="pull-left mevent">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle border-right" data-toggle="dropdown" href="#">My Events <i class="glyphicon glyphicon-menu-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="green"><a class="MyEventsdropdown">Organizing</a></li>
+                                <li><a class="MyEventsdropA">Attendin</a></li>
+                                <li><a class="MyEventsdropI">Invited</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <div class="txt-name">
+                                <button type="button" class="btn btn-danger">New event</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="pull-right nav-right">
+                        <li class="date-control">
+                            <div class="txt-name">
+                                <input type="text" id="from" name="from" placeholder="Feb 15, 2015">
+                                <label for="to"><i class="glyphicon glyphicon-arrow-right"></i></label>
+                                <input type="text" id="to" name="to" placeholder="Mar 15, 2015">
+                            </div>
+                        </li>
+
+                        <li class="dropdown">
+
+                            @*@Html.DropDownListFor(m => m.First().catid, new SelectList(ViewBag.Category as System.Collections.IEnumerable,
+                                "Id", "CategoryName"), "Category", new { id = "catId" })*@
+                            @Html.DropDownListFor(m => m.First().catid, new SelectList(ViewBag.EventType as System.Collections.IEnumerable,
+                                       "TypeId", "TypeName"), "Category", new { id = "TypeId" })
+                    
+                    </li>
+                    </ul>
+                    
+                </div>
+             </nav>         
+          </div>       
+    </div>
+    
+
+
+    <!-- top container grey -->
+
+    <div class="container grey-section">
+        <div class="grey-panel row">
+            <div class="col-md-6 grey-left">
+                <div class="checkbox checkbox-primary pull-left">
+                    <input class="styled" id="main-select-all" type="checkbox">
+                    <label></label>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default"><img src="~/Content/images/icon1.png" alt="" /></button>
+                    <button type="button" class="btn btn-default"><img src="~/Content/images/icon2.png" alt="" /></button>
+                    <button type="button" class="btn btn-default" id="btndelete"><img src="~/Content/images/delete.png" alt="" /></button>
+                </div>
+            </div>
+            <div class="col-md-6 grey-right noPaddingRight">
+                <ul class="pull-right">
+                    <li> 4 events sorted by <a href="#">category</a> <span class="plus">+</span><a href="#"> location</a> </li>
+                    <li class="search pos-rel" id="search-item">  <span class="icon">Search</span><input type="text" maxlength="40" placeholder="Search Event" class="search-item"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container main-section">
+        <div class="container-main row">
+            <ul class="organized-events col-md-12">
+                <li class="dropdown">
+                    <a class="dropdown-toggle my-events" data-toggle="dropdown" href="#">ORGANIZED EVENTS <i class="glyphicon glyphicon-menu-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li class="green"><a href="#">Organizing (10)</a></li>
+                        <li><a href="#">Attending (5)</a></li>
+                        <li><a href="#">Invited (1)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input class="styled chkbtn" type="checkbox">
+                        <label>Archived</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="checkbox checkbox-primary pull-left">
+                        <input class="styled chkbtn" type="checkbox">
+                        <label>Completed</label>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="col-md-1 scrollspy">
+                <nav id="target_nav" data-spy="affix">
+                    <ul class="nav">
+                        @*<li class="active"><a href="#2015">2015</a></li>
+                        <li><a href="#2014">2014</a></li>
+                        <li><a href="#2013">2013</a></li>
+                        <li><a href="#2012">2012</a></li>*@
+                        @*@foreach (var year in @ViewBag.varyear)
+                        {
+                            
+                            <li class="active"><a href="#@Html.Encode(year.memdate)">@Html.Encode(year.memdate)</a></li>
+                            
+                        }*@
+
+                        @for (int i = 0; i < ViewBag.varyear.Count;i++ )
+                        {
+                            if(i == 0)
+                            {
+                            <li class="active"><a href="#@Html.Encode(@ViewBag.varyear[i].memdate)" class="year">@Html.Encode(@ViewBag.varyear[i].memdate)</a></li>
+                            }
+                            else
+                            {
+                            <li><a href="#@Html.Encode(@ViewBag.varyear[i].memdate)" class="year">@Html.Encode(@ViewBag.varyear[i].memdate)</a></li>
+                            }
+                        }
+
+                    </ul>
+                </nav>
+            </div>
+            @*<div id="myScrollspy" class="col-md-11">
+                <!-- year 2015 -->
+                <section id="2015">
+                    <div id="divJan">
+                        <ul class="thumbnails january" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" id="jan15" class="styled select-all">
+                                    <label></label>
+                                    <span class="month-text">JAN</span>
+                                </div>
+
+                            </li>
+
+
+                            @foreach (var urladdress in @ViewBag.EventVarDataJan)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="jan14" value=@urladdress.EventId class="styled jan15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+
+                    <div id="divFeb">
+                        <ul class="thumbnails  february" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="feb15">
+                                    <label></label>
+                                    <span class="month-text">FEB</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataFeb)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="feb14" value=@urladdress.EventId class="styled feb15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+                    <div id="divMar">
+                        <ul class="thumbnails  march" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="mar15">
+                                    <label></label>
+                                    <span class="month-text">MAR</span>
+                                </div>
+
+                            </li>
+
+                            @foreach (var urladdress in @ViewBag.EventVarDataMarch)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="mar14" value=@urladdress.EventId class="styled mar15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                    <div id="divApr">
+                        <ul class="thumbnails  april" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input class="styled select-all" type="checkbox" id="apr15">
+                                    <label></label>
+                                    <span class="month-text">APR</span>
+                                </div>
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataApr)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="apr14" value=@urladdress.EventId class="styled apr15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+
+                    <div id="divMay">
+                        <ul class="thumbnails  may" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="may15">
+                                    <label></label>
+                                    <span class="month-text">May</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataMay)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="may14" value=@urladdress.EventId class="styled may15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <div id="divJune">
+                        <ul class="thumbnails  june" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="june15">
+                                    <label></label>
+                                    <span class="month-text">June</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataJune)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="june14" value=@urladdress.EventId class="styled june15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <div id="divJuly">
+                        <ul class="thumbnails  july" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="july15">
+                                    <label></label>
+                                    <span class="month-text">July</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataJuly)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="july14" value=@urladdress.EventId class="styled july15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <div id="divAug">
+                        <ul class="thumbnails  aug" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="aug15">
+                                    <label></label>
+                                    <span class="month-text">August</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataAug)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="aug14" value=@urladdress.EventId class="styled aug15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <div id="divSep">
+                        <ul class="thumbnails  sep" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="sep15">
+                                    <label></label>
+                                    <span class="month-text">September</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataSep)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="sep14" value=@urladdress.EventId class="styled sep15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+
+                    <div id="divOct">
+                        <ul class="thumbnails  oct" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="oct15">
+                                    <label></label>
+                                    <span class="month-text">October</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataOct)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="oct14" value=@urladdress.EventId class="styled oct15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <div id="divNov">
+                        <ul class="thumbnails  nov" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="nov15">
+                                    <label></label>
+                                    <span class="month-text">November</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataNov)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="nov14" value=@urladdress.EventId class="styled nov15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+
+                    <div id="divDec">
+                        <ul class="thumbnails  nov" id="hover-cap-4col">
+                            <li class="month">
+                                <div class="checkbox checkbox-primary pull-left">
+                                    <input type="checkbox" class="styled select-all" id="dec15">
+                                    <label></label>
+                                    <span class="month-text">December</span>
+                                </div>
+
+                            </li>
+                            @foreach (var urladdress in @ViewBag.EventVarDataDec)
+                            {
+                                <li class="col-md-4">
+                                    <div class="checkbox checkbox-primary pull-left">
+                                        <input type="checkbox" name="dec14" value=@urladdress.EventId class="styled dec15">
+                                        <label></label>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="icon">
+                                                <a href="#"><span><img src="~/Content/images/cap-icon1.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon2.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon3.png" /></span></a>
+                                                <a href="#"><span><img src="~/Content/images/cap-icon4.png" /></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <img src="@Url.Content(urladdress.ImageURL)" />
+                                        <h5> @Html.Encode(urladdress.Name)</h5>
+                                        <p> @Html.Encode(urladdress.Description)</p>
+                                        <p class="seperator"></p>
+                                        <h6>Event Location @Html.Encode(urladdress.LocationName)</h6>
+                                        <h6>Event Date @Html.Encode(urladdress.FromDate.ToString("MM/dd/yyyy")) to @Html.Encode(urladdress.ToDate.ToString("MM/dd/yyyy"))</h6>
+                                        <h6>Last Updated @Html.Encode(urladdress.LastUpdated)</h6>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+
+                </section>
+                <div class="clear-both;"></div>
+                <!-- year 2014 -->
+
+
+            </div>*@
+
+                <div id="divFeature">
+                    @{ Html.RenderAction("GetEventforDashboard", "Home", new { name = "" });}
+                </div>
+            
+        </div>
+    </div>
+
+    <script src="~/Content/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery-ui.min.js"></script>
+    <script src="~/Content/js/BackToTop.min.jquery.js"></script>
+    <!-- Include all custom js files-->
+    <!-- Affix (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="~/Content/js/affix.js"></script>
+    <script src="~/Content/js/custom.js"></script>
+
+    @*<script>
+            $(document).ready(function () {
+                debugger;
+                $('#main-select-all').click(function (event) {  //on click
+                    debugger;
+                    if (this.checked) { // check select status
+                        $('.styled').each(function () { //loop through each checkbox
+                            this.checked = true;  //select all checkboxes with class "checkbox1"
+                        });
+                    } else {
+                        $('.styled').each(function () { //loop through each checkbox
+                            this.checked = false; //deselect all checkboxes with class "checkbox1"
+                        });
+                    }
+                });
+
+            });
+
+        </script>*@
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+           
+
+
+          
+            $('#target_nav').affix({
+                offset: {
+                    top: $('#target_nav').offset().top
+                }
+            });
+
+            $("#TypeId").change(function () {
+                //alert($(this).val());
+                //alert($("#TypeId :selected").text());
+                var url = '@Url.Action("GetEventForCategory", "Home")';
+                url += "?typeid=" + $(this).val();
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+
+                })
+            });
+
+           
+            // This code is not working 
+            //$("input[type=checkbox]").change(function () {
+            //    alert("checkbox");
+            //    //if ($(this).prop("checked") == true) {
+
+            //    //    alert("Checkbox is checked.");
+            //    //    alert($(this).val());
+            //    //    var favorite = [];
+
+            //    //    if ($(this).hasClass("select-all")) {
+            //    //        alert("select all clicked");
+            //    //        $('.jan15').attr('checked', true);
+            //    //        alert("checked true")
+
+            //    //        $.each($("input[type='checkbox']:checked"), function () {
+            //    //            favorite.push($(this).val());
+            //    //        });
+
+            //    //        alert("Values of my checked checkboxes are " + favorite.join(", "));
+
+            //    //    }
+            //    //}
+            //    //else if ($(this).prop("checked") == false) {
+            //    //    alert("Checkbox is unchecked.");
+            //    //}
+            //});
+
+            //var checkbox = document.getElementsByClassName("chkclass");
+            
+
+            //for (var i = 0; i < checkbox.length; i++) {
+            //    if (checkbox[i].checked) { alert('cheked')}
+            //    else { alert('uncheked') }
+            //}
+
+            //$('.chkclass').each(function () {
+            //    if ($(this).is(':checked')) {
+            //        alert('hello');//logic here
+            //    }
+            //    else
+            //    {
+            //        alert('hi');
+            //    }
+            //});
+
+            //$("#input[type=checkbox]").change(function () {
+            //    alert("button");
+            //    //if ($(this).prop("checked") == true) {
+
+            //    //    alert("Checkbox is checked.");
+            //    //    alert($(this).val());
+            //    //    var favorite = [];
+
+            //    //    if ($(this).hasClass("select-all")) {
+            //    //        alert("select all clicked");
+            //    //        $('.jan15').attr('checked', true);
+            //    //        alert("checked true")
+
+            //    //        $.each($("input[type='checkbox']:checked"), function () {
+            //    //            favorite.push($(this).val());
+            //    //        });
+
+            //    //        alert("Values of my checked checkboxes are " + favorite.join(", "));
+
+            //    //    }
+            //    //}
+            //    //else if ($(this).prop("checked") == false) {
+            //    //    alert("Checkbox is unchecked.");
+            //    //}
+            //});
+
+            function ClickFeature(feature) //funtion to change the text and descripion on icon click
+            {
+                alert('in click feature');
+
+                var url = '@Url.Action("GetMyEvents", "Home")';
+                url += "?status=" + feature;
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+
+                })
+            }
+
+            $(".MyEventsdropI").click(function () {
+                               
+                var url = '@Url.Action("GetMyEvents", "Home")';
+                url += "?status=Invited";
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+
+                })
+            });
+
+            $(".MyEventsdropA").click(function () {
+
+                var url = '@Url.Action("GetMyEvents", "Home")';
+                url += "?status=Attending";
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+
+                })
+            });
+            //MyEventsdropdown
+
+            $(".MyEventsdropdown").click(function () {
+
+                var url = '@Url.Action("GetMyEvents", "Home")';
+                url += "?status=Organizing";
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+
+                })
+            });
+          
+            $(".year").click(function () {
+
+                //$.ajax({
+                //    url: "/Home/GetEvent",
+                //    type: "POST",
+                //    data: { name: $(this).text() },
+                //    success: function (data) {
+
+                //    }
+                //});
+               
+                var url = '@Url.Action("GetEventforDashboard", "Home")';
+                url += "?name=" + $(this).text();
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+                    
+                })
+
+               
+                if (!($('input[type="checkbox"]').hasClass('jan15'))) {
+                    $("#divJan").hide();
+                }
+
+               
+                if (!($('input[type="checkbox"]').hasClass('feb15'))) {
+                    $("#divFeb").hide();
+                }
+               
+
+                if (!($('input[type="checkbox"]').hasClass('mar15'))) {
+                    $("#divMar").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('apr15'))) {
+                    $("#divApr").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('may15'))) {
+                    $("#divMay").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('june15'))) {
+                    $("#divJune").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('july15'))) {
+                    $("#divJuly").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('aug15'))) {
+                    $("#divAug").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('sep15'))) {
+                    $("#divSep").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('oct15'))) {
+                    $("#divOct").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('nov15'))) {
+                    $("#divNov").hide();
+                }
+
+                if (!($('input[type="checkbox"]').hasClass('dec15'))) {
+                    $("#divDec").hide();
+                }
+
+            });
+
+          
+            //$("#btndelete").livequery("click", function (event) {
+            //    event.preventDefault();
+            //    alert("in delete");
+            //});
+
+            var checkboxvalues = "";
+            $('input[type="checkbox"]').click(function () {
+                if ($(this).prop("checked") == true) {
+
+
+                    var favorite = [];
+
+                    // if ($(this).hasClass("select-all")) {
+
+                    $.each($("input[type='checkbox']:checked"), function () {
+                        favorite.push($(this).val());
+
+                    });
+
+                    //checkboxvalues = favorite.join("| ");
+                    //alert(checkboxvalues);
+                     checkboxvalues = favorite;
+                    // alert("Values of my checked checkboxes are " + checkboxvalues);
+                    //alert(checkboxvalues);
+                    $("#btnhid").val(checkboxvalues);
+
+
+                    //}
+                }
+                else if ($(this).prop("checked") == false) {
+
+                }
+            });
+
+
+            $("#btndelete").click(function () {
+                //$.ajax({
+                //    url: "/Home/DeleteEvent",
+                //    type: "POST",
+                //    data: { name: $(this).val() },
+                //    success: function (data) {
+
+                //    }
+                //});
+               // alert($("#btnhid").val());
+                var ids = $("#btnhid").val();
+                //alert(ids);
+                var url = '@Url.Action("DeleteEvent", "Home")';
+                url += "?EventIds=" + ids.toString();
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+
+                })
+
+            });
+
+            
+            @*LoadPartialView()
+            {
+                var url = '@Url.Action("GetEventforDashboard", "Home")';
+                url += "?ViewFeature=" + feature;
+                $('#divFeature').load(url, { flip: false }, function () {  //function to load selected  view
+
+                }).ajaxSuccess(function () { }).ajaxComplete(function () {
+                    // ajaxStop();
+                })
+            }*@
+                       
+           if(!($('input[type="checkbox"]').hasClass('jan15')))
+            {
+               $("#divJan").hide();
+            }
+            
+
+           if (!($('input[type="checkbox"]').hasClass('feb15'))) {
+                $("#divFeb").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('mar15'))) {
+                $("#divMar").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('apr15'))) {
+                $("#divApr").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('may15'))) {
+                $("#divMay").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('june15'))) {
+                $("#divJune").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('july15'))) {
+                $("#divJuly").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('aug15'))) {
+                $("#divAug").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('sep15'))) {
+                $("#divSep").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('oct15'))) {
+                $("#divOct").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('nov15'))) {
+                $("#divNov").hide();
+            }
+
+            if (!($('input[type="checkbox"]').hasClass('dec15'))) {
+                $("#divDec").hide();
+            }
+
+
+            //if ($('input[type="checkbox"]').hasClass('mar15')) {
+            //    alert('has class mar 15')
+            //}
+            //else {
+            //    $("#divMar").hide();
+            //}
+
+         
+                
+
+            //to get values of all the selected checkboxes
+            //$('input[type="checkbox"]').click(function () {
+            //    alert("checkbox");
+            //    if ($(this).prop("checked") == true) {
+
+            //        alert("Checkbox is checked.");
+            //        alert($(this).val());
+            //        var favorite = [];
+
+            //        if ($(this).hasClass("select-all")) {
+            //            alert("select all clicked");
+            //            $('.jan15').attr('checked', true);
+            //            alert("checked true")
+
+            //            $.each($("input[type='checkbox']:checked"), function () {
+            //                favorite.push($(this).val());
+            //            });
+
+            //            alert("Values of my checked checkboxes are " + favorite.join(", "));
+
+            //        }
+            //    }
+            //    else if ($(this).prop("checked") == false) {
+            //        alert("Checkbox is unchecked.");
+            //    }
+            //});
+
+        });
+
+
+    </script>
+
+</body>
+</html>

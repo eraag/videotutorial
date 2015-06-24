@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Event" Class="EventDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=EF_6\SQLEXPRESS;Initial Catalog=Event;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="EventConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Event" Member="Events">
+    <Type Name="Event">
+      <Column Name="EventId" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrganizerId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="TypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Archived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RequestDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ENABLED_RSVP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GlobalRSVPDeadline" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ImageURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Event_EventBlock" Member="EventBlocks" ThisKey="EventId" OtherKey="EventId" Type="EventBlock" />
+      <Association Name="EventType_Event" Member="EventType" ThisKey="TypeId" OtherKey="TypeId" Type="EventType" IsForeignKey="true" />
+      <Association Name="Member_Event" Member="Member" ThisKey="OrganizerId" OtherKey="PID" Type="Member" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventBlock" Member="EventBlocks">
+    <Type Name="EventBlock">
+      <Column Name="EID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UsingVenue" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VenueId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DefaultLocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DefaultAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ENABLED_SCHEDULE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ENABLED_ARRANGEMENTS" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ENABLED_DRAFTS" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ENABLED_RSVP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RSVPDeadline" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Event_EventBlock" Member="Event" ThisKey="EventId" OtherKey="EventId" Type="Event" IsForeignKey="true" />
+      <Association Name="Venue_EventBlock" Member="Venue" ThisKey="VenueId" OtherKey="VenueId" Type="Venue" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Venue" Member="Venues">
+    <Type Name="Venue">
+      <Column Name="VenueId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="StreetAddress" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Venue_EventBlock" Member="EventBlocks" ThisKey="VenueId" OtherKey="VenueId" Type="EventBlock" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventType" Member="EventTypes">
+    <Type Name="EventType">
+      <Column Name="TypeId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="EventType_Event" Member="Events" ThisKey="TypeId" OtherKey="TypeId" Type="Event" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Member" Member="Members">
+    <Type Name="Member">
+      <Column Name="PID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
+      <Column Name="PW" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Tier" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RGCreationReliability" Type="System.Decimal" DbType="Decimal(8,7)" CanBeNull="true" />
+      <Column Name="ImgThumbURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Member_Event" Member="Events" ThisKey="PID" OtherKey="OrganizerId" Type="Event" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_GetEventForMember" Method="sp_GetEventForMember">
+    <Parameter Name="MemberId" Parameter="memberId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Month" Parameter="month" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Year" Parameter="year" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_GetEventForMemberResult">
+      <Column Name="EventId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ImageURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DefaultLocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetYear" Method="GetYear">
+    <ElementType Name="GetYearResult">
+      <Column Name="memdate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_DeleteEvent" Method="sp_DeleteEvent">
+    <Parameter Name="EventID" Parameter="eventID" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_SearchEventOnCategory" Method="sp_SearchEventOnCategory">
+    <Parameter Name="MemberId" Parameter="memberId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Month" Parameter="month" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Year" Parameter="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TypeId" Parameter="typeId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_SearchEventOnCategoryResult">
+      <Column Name="EventId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ImageURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DefaultLocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetCollaborator" Method="sp_GetCollaborator">
+    <Parameter Name="MemberId" Parameter="memberId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="sp_GetCollaboratorResult">
+      <Column Name="initial" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="eventid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetGuestStatus" Method="sp_GetGuestStatus">
+    <Parameter Name="OfficialPId" Parameter="officialPId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="GuestStatus" Parameter="guestStatus" Type="System.Char" DbType="Char(1)" />
+    <ElementType Name="sp_GetGuestStatusResult">
+      <Column Name="eventid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetEventsForMyEvents" Method="sp_GetEventsForMyEvents">
+    <Parameter Name="EventId" Parameter="eventId" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="Month" Parameter="month" Type="System.String" DbType="NVarChar(2)" />
+    <ElementType Name="sp_GetEventsForMyEventsResult">
+      <Column Name="EventId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FromDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ToDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ImageURL" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DefaultLocationName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetCollaboratorForMyEvents" Method="sp_GetCollaboratorForMyEvents">
+    <Parameter Name="EventId" Parameter="eventId" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="sp_GetCollaboratorForMyEventsResult">
+      <Column Name="initial" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="eventid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
